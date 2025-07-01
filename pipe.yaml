@@ -1,0 +1,26 @@
+# .gitlab-ci.yml
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "🏗 Building..."
+    - npm install
+
+test:
+  stage: test
+  script:
+    - echo "🧪 Testing..."
+    - npm test
+
+deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - echo "🚀 Deploying to production..."
+    - ssh user@your-server "cd /app && git pull origin main && pm2 restart app"
+
